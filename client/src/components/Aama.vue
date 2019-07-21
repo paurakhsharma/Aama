@@ -15,7 +15,7 @@
                   name="age"
                   class="form-control"
                   id="age"
-                  placeholder="Age"
+                  placeholder="Enter mother's age"
                   v-model="age" />
               </div>
             </div>
@@ -29,7 +29,7 @@
                   name="delNo"
                   class="form-control"
                   id="delNo"
-                  placeholder="Birth Order"
+                  placeholder="Enter child's birth order"
                   v-model="deliveryN"
                 />
               </div>
@@ -109,7 +109,7 @@
 <script>
 import SyncLoader from 'vue-spinner/src/SyncLoader.vue'
 
-const SERVER_URL = 'http://localhost:5000'
+const SERVER_URL = 'https://www.aama.ml'
 
 export default {
   name: "Aama",
