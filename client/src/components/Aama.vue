@@ -85,17 +85,19 @@
           <div class="col-5 text-left">
             <!-- <img class="logo" src alt /> -->
           </div>
-          <div v-if="survived">
-            <div class="col-6 logo-p text-dark to-left">
+          <div>
+            <div v-if="survived" style="margin-left: 150px">
+            <div class="col-8 logo-p text-dark">
               Needs C-Section
               <img src="@/assets/csection.png"  class="result-img" alt="">
             </div>
-          </div>
-          <div v-if="notSurvived">
-            <div class="col-6 logo-p text-dark to-left">
-              No need of C-Section
             </div>
-            <img src="@/assets/no_csection.png" class="result-img" alt="">
+            <div v-if="notSurvived">
+              <div class="col-6 logo-p text-dark to-left">
+                Normal Delivery
+              </div>
+              <img src="@/assets/no_csection.png" style="margin-left:-60px" class="result-img" alt="">
+            </div>
           </div>
         <img class="img" src="@/assets/texture.png" />
       </div>
