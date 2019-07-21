@@ -38,9 +38,12 @@ def train(df):
 
     # create feature dataframe
     X = pd.concat([df_['Age'], enc_DeliveryN, enc_DeliveryT, enc_Blood, df_['Heart']], axis=1, sort=False)
+<<<<<<< HEAD
     print('--------------------------')
     print(X.head())
     print('---------------------------')
+=======
+>>>>>>> da7ef873ed5c3cfdfbb34b47341e4c4257ee2e0e
     # create lable dataframe
     y = df_['Caesarian']
 
@@ -50,7 +53,10 @@ def train(df):
 
     # capture a list of columns that will be used for prediction
     model_columns = list(X_train.columns)
+<<<<<<< HEAD
     print("Model columns are", model_columns)
+=======
+>>>>>>> da7ef873ed5c3cfdfbb34b47341e4c4257ee2e0e
 
     model = Sequential()
     #First Hidden Layer
@@ -81,16 +87,13 @@ def predict(input_df, model, columns):
 
     # load json and create model
     json_file = open(MODEL_FILE_NAME + '.json', 'r')
-    print('1')
     loaded_model_json = json_file.read()
-    print('2')
     json_file.close()
     loaded_model = model_from_json(loaded_model_json)
-    print('3')
+
     # load weights into new model
     print(MODEL_FILE_NAME)
     loaded_model.load_weights(MODEL_FILE_NAME + ".h5")
-    print('4')
     print("Loaded model from disk")
 
     # encode class values as integers
@@ -102,19 +105,9 @@ def predict(input_df, model, columns):
     scaler = joblib.load(MODEL_DIRECTORY + '/scaler.pkl')
     input_df['Age'] = scaler.transform(input_df[['Age']])
 
-    print('input_df')
-    print(input_df)
-
-    print('enc_DeliveryN')
-    print(enc_DeliveryN.head())
-
-    print('Input df age')
-    print(input_df['Age'])
-
     features = pd.concat([input_df, enc_DeliveryN, enc_DeliveryT, enc_Blood], axis=1, sort=False)
     features = features.reindex(columns=columns, fill_value=0)
-    print('features')
-    print(features)
+
     prediction = model.predict(features)[0][0]
 
     print('The prediction is')

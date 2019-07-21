@@ -27,8 +27,7 @@ def train():
     # We use a global here so we can modify the model and list of column names
     global model_columns, model
     model_columns, model = model_utils.train(df)
-    # joblib.dump(model_columns, model_utils.MODEL_COLUMNS_FILE_NAME)
-    # joblib.dump(model, model_utils.MODEL_FILE_NAME)
+    
     # save the model
 
     # serialize model to JSON
@@ -38,7 +37,6 @@ def train():
     # serialize weights to HDF5
     model.save_weights(model_utils.MODEL_FILE_NAME + ".h5")
     print("Saved model to disk")
-    print(model)
 
     return jsonify({'success': 'Model training successful'})
 
