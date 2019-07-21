@@ -10,6 +10,7 @@
               <label for="age" class="col-sm-3 col-form-label">Age</label>
               <div class="col-sm-9">
                 <input 
+                  required
                   type="number"
                   name="age"
                   class="form-control"
@@ -23,6 +24,7 @@
               <label for="delNo" class="col-sm-3 col-form-label">Delivery Number</label>
               <div class="col-sm-9">
                 <input
+                  required
                   type="number"
                   name="delNo"
                   class="form-control"
@@ -36,8 +38,8 @@
             <div class="form-group row">
               <label for="post" class="col-sm-3 col-form-label">Delivery Time</label>
               <div class="col-sm-9">
-                <select name="post" class="form-control" id="time" v-model="deliveryT">
-                  <option value>Select Time</option>
+                <select name="post" class="form-control" id="time" v-model="deliveryT" required>
+                  <option disabled value>Select Time</option>
                   <option value="0">Timely</option>
                   <option value="1">Premature</option>
                   <option value="2">Late Comer</option>
@@ -48,7 +50,7 @@
             <div class="form-group row">
               <label for="post" class="col-sm-3 col-form-label">Blood Pressure</label>
               <div class="col-sm-9">
-                <select name="post" class="form-control" id="pressure" v-model="blood">
+                <select name="post" class="form-control" id="pressure" v-model="blood" required>
                   <option disabled value="">Select Blood Pressure</option>
                   <option value="0">Low</option>
                   <option value="1">Normal</option>
@@ -58,22 +60,20 @@
             </div>
 
             <div class="form-group row">
-              <label for="heartRate" class="col-sm-3 col-form-label">Heart Rate</label>
+              <label for="heartRate" class="col-sm-3 col-form-label">Heart Problem</label>
               <div class="col-sm-9">
-                <input
-                  type="number"
-                  name="heartRate"
-                  class="form-control"
-                  id="heartRate"
-                  placeholder="Heart Rate"
-                  v-model="heart"
-                />
+                <div class="radio">
+                <label><input v-model="heart" type="radio" name="optradio" value="0" checked>No</label>
+              </div>
+              <div class="radio">
+                <label><input v-model="heart"  type="radio" name="optradio" value="1">Yes</label>
+              </div>
               </div>
             </div>
 
-            <div class="text-center mt-5 pt-5">
-              <button type="reset" class="btn btn-outline-warning mr-1">Reset</button>
-              <button type="submit" class="btn btn-outline-success mr-1" @click.prevent='predict'>Submit</button>
+            <div class="text-center mt-5">
+              <button v-if="!loading" type="submit" class="btn btn-success btn-lg mr-1" @click.prevent='predict'>Submit</button>
+              <sync-loader class="pt-2" :loading="loading" :color="color" :size="size"></sync-loader>
             </div>
           </form>
         </div>
@@ -89,7 +89,7 @@
             <div v-if="survived" style="margin-left: 150px">
             <div class="col-8 logo-p text-dark">
               Needs C-Section
-              <img src="@/assets/csection.png"  class="result-img" alt="">
+              <img src="@/assets/csection.png"  class="result-img pt-5" alt="">
             </div>
             </div>
             <div v-if="notSurvived">
@@ -107,10 +107,15 @@
 </template>
 
 <script>
+import SyncLoader from 'vue-spinner/src/SyncLoader.vue'
+
 const SERVER_URL = 'http://localhost:5000'
 
 export default {
   name: "Aama",
+  components: {
+    SyncLoader
+  },
   data() {
     return {
       prediction: '',
@@ -118,11 +123,18 @@ export default {
       deliveryN: '',
       deliveryT: '',
       blood: '',
-      heart: ''
+      heart: '',
+      loading: false
     }
   },
   methods: {
     predict() {
+      this.loading = true
+      setTimeout(() => {
+        this.runPrediction()
+      }, 2000)
+    },
+    runPrediction() {
       console.log(this.age)
       console.log(this.deliveryN)
       console.log(this.deliveryT)
@@ -141,6 +153,7 @@ export default {
         .then((response) => {
           console.log(response.data.predictions)
           this.prediction = parseInt(response.data.predictions)
+          this.loading = false
       })
     }
   },
