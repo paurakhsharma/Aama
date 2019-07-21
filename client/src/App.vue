@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Aama msg="Welcome to Your Vue.js App" />
+    <Aama />
   </div>
 </template>
 
