@@ -21,7 +21,7 @@
             </div>
 
             <div class="form-group row">
-              <label for="delNo" class="col-sm-3 col-form-label">Delivery Number</label>
+              <label for="delNo" class="col-sm-3 col-form-label">Birth Order</label>
               <div class="col-sm-9">
                 <input
                   required
@@ -29,7 +29,7 @@
                   name="delNo"
                   class="form-control"
                   id="delNo"
-                  placeholder="Delivery Number"
+                  placeholder="Birth Order"
                   v-model="deliveryN"
                 />
               </div>
