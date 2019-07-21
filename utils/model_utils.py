@@ -38,12 +38,6 @@ def train(df):
 
     # create feature dataframe
     X = pd.concat([df_['Age'], enc_DeliveryN, enc_DeliveryT, enc_Blood, df_['Heart']], axis=1, sort=False)
-<<<<<<< HEAD
-    print('--------------------------')
-    print(X.head())
-    print('---------------------------')
-=======
->>>>>>> da7ef873ed5c3cfdfbb34b47341e4c4257ee2e0e
     # create lable dataframe
     y = df_['Caesarian']
 
@@ -53,10 +47,6 @@ def train(df):
 
     # capture a list of columns that will be used for prediction
     model_columns = list(X_train.columns)
-<<<<<<< HEAD
-    print("Model columns are", model_columns)
-=======
->>>>>>> da7ef873ed5c3cfdfbb34b47341e4c4257ee2e0e
 
     model = Sequential()
     #First Hidden Layer
